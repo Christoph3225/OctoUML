@@ -964,7 +964,7 @@ public abstract class AbstractDiagramController {
         colorPicker.setValue(Color.BLACK);
         colorPicker.setOnAction(t -> sketchController.color = colorPicker.getValue());
     }
-    void setButtonClicked(Button b) {
+    protected void setButtonClicked(Button b) {
         buttonInUse.getStyleClass().remove("button-in-use");
         buttonInUse = b;
         buttonInUse.getStyleClass().add("button-in-use");

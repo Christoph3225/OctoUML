@@ -11,7 +11,7 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="borderPane" fx:controller="controller.ClassDiagramController" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:id="borderPane" fx:controller="com.octouml.language.montiarc.MontiArcDiagramController" xmlns:fx="http://javafx.com/fxml">
     <top>
         <VBox>
             <ToolBar fx:id="aToolBar" orientation="HORIZONTAL">
@@ -33,7 +33,8 @@
                 <HBox fx:id="recognizeBox">
                     <Button text="Recognize" fx:id="recognizeBtn"/>
                     <Button text="Voice" fx:id="voiceBtn"/>
-                </HBox>
+                    <Button text="checkValidity" fx:id="checkValidityBtn"/>
+                </HBox>	
             </ToolBar>
         </VBox>
     </top>
