@@ -1,4 +1,4 @@
-package com.octouml.language.montiarc;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -7,7 +7,6 @@ import javafx.scene.input.MouseButton;
 import model.Sketch;
 import org.controlsfx.control.Notifications;
 
-import controller.AbstractDiagramController;
 //import controller.AbstractDiagramController.Mode;
 //import controller.AbstractDiagramController.ToolEnum;
 import util.commands.CompoundCommand;
@@ -18,10 +17,7 @@ import view.nodes.PackageNodeView;
 import java.awt.geom.Point2D;
 
 public class MontiArcController extends AbstractDiagramController{
-	//irgendwie die Klasse visible machen
-	//in der AbstractClass ist das Enum und die Buttons definiert. Die müssen modifiziert werden
 	// verstehen was die eigentlichen Funktionen hier machen
-	//man müsste in der AbstractDiagramController einiges auf protected setzen, um hier darauf Zugriff zu haben
 	@FXML
     public void initialize() {
         super.initialize();
