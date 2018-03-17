@@ -54,6 +54,8 @@ public class RecognizeController {
         ArrayList<AbstractEdge> recognizedEdges = new ArrayList<>();
         CompoundCommand recognizeCompoundCommand = new CompoundCommand();
 
+        // Unterscheidung nach ClassDiagram und MontiArcDiagram hier
+        
         //Go through all sketches to find Nodes.
         for (Sketch s : sketches) {
             if (s.getStroke() != null && s.getStroke().getPoints() != null && !s.getStroke().getPoints().isEmpty()) {
@@ -110,6 +112,8 @@ public class RecognizeController {
             }
         }
 
+        // Ab hier müsste es wieder für alle gleich sein. 
+        
         for(AbstractNode node : recognizedNodes){
             AbstractNodeView nodeView = diagramController.createNodeView(node, false);
             recognizeCompoundCommand.add(new AddDeleteNodeCommand(diagramController, graph, nodeView, node, true));
