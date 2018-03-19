@@ -13,6 +13,8 @@ import model.edges.AbstractEdge;
 import model.edges.AssociationEdge;
 import model.nodes.AbstractNode;
 import model.nodes.ClassNode;
+import model.nodes.ComponentNode;
+import model.nodes.PortNode;
 import model.nodes.Node;
 import util.commands.AddDeleteEdgeCommand;
 import util.commands.AddDeleteNodeCommand;
@@ -21,6 +23,7 @@ import view.edges.AbstractEdgeView;
 import view.nodes.AbstractNodeView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -31,6 +34,7 @@ public class RecognizeController {
     private AbstractDiagramController diagramController;
     private PaleoSketchRecognizer recognizer;
     private Graph graph;
+    HashMap<BoundingBox, Sketch> sketchMap = new HashMap<>();
 
 
     public RecognizeController(Pane pDrawPane, AbstractDiagramController pController) {
@@ -52,9 +56,9 @@ public class RecognizeController {
         ArrayList<AbstractNode> recognizedNodes = new ArrayList();
         ArrayList<Sketch> sketchesToBeRemoved = new ArrayList<>();
         ArrayList<AbstractEdge> recognizedEdges = new ArrayList<>();
+        ArrayList<BoundingBox> boxes = new ArrayList();
         CompoundCommand recognizeCompoundCommand = new CompoundCommand();
 
-        // Unterscheidung nach ClassDiagram und MontiArcDiagram hier
         
         //Go through all sketches to find Nodes.
         for (Sketch s : sketches) {
@@ -74,7 +78,8 @@ public class RecognizeController {
 
             }
         }
-
+        
+        
         //Go through all sketches to find edges. Edges need to be recognized after nodes
         for (Sketch s : sketches) {
             if (s.getStroke() != null) {
@@ -132,4 +137,96 @@ public class RecognizeController {
         }
 
     }
+
+
+    public synchronized void recognizeMonti(List<Sketch> sketches) {	
+    	ArrayList<AbstractNode> recognizedNodes = new ArrayList();
+        ArrayList<Sketch> sketchesToBeRemoved = new ArrayList<>();
+        ArrayList<AbstractEdge> recognizedEdges = new ArrayList<>();
+        ArrayList<BoundingBox> boxes = new ArrayList();
+        CompoundCommand recognizeCompoundCommand = new CompoundCommand();
+        
+
+        for (Sketch s : sketches) {
+            if (s.getStroke() != null && s.getStroke().getPoints() != null && !s.getStroke().getPoints().isEmpty()) {
+//                //TODO This sometimes throws IndexOutOfBoundsException...
+                recognizer.setStroke(s.getStroke());
+                Shape bestMatch = recognizer.recognize().getBestShape();
+                String bestMatchString = bestMatch.getInterpretation().label;
+                if (bestMatchString.equals("Square") || bestMatchString.equals("Rectangle")) {
+                    BoundingBox box = s.getStroke().getBoundingBox();
+                    boxes.add(box);
+                    sketchMap.put(box,s);
+        			// vielleicht hier eine Map von sketch s zu box b noch hinzufügen oder andersherum
+                }
+            }
+        }
+        for (BoundingBox b : boxes) {
+        	for (BoundingBox bb: boxes) {
+        		if(b.intersects(bb.getX(), bb.getY(), bb.getWidth(), bb.getHeight())) {
+//        			// dann schneiden sich die beiden Boxen
+//        			// d.h. eine Box ist vermutlich eine Component und eine ist ein Port
+        			if(b.getWidth()*b.getHeight() > bb.getWidth()*bb.getHeight()) {
+        				// dann wissen wir, dass das Volumen von b größer als von bb ist
+        				// und leiten ab, dass b Component und bb Port
+        				
+        				// Jetzt muss erst noch gecheckt werden, ob es bereits einen Node für die jeweilige Box gibt
+        				// Wenn das der Fall ist, müssen wir den ComponentNode nicht mehr erzeugen und nur noch den PortNode zum ComponentNode hinzufügen
+        				// Ansonsten müssen beide erzeugt werden
+        				// Die Nodes sind im Graphen drin
+        				Point2D point = new Point2D(b.getX(), b.getY());
+        				if(graph.findNode(point) != null) {
+        					// Fall 1: ComponentNode existiert bereits
+        					PortNode port = new PortNode(bb.getX(), bb.getY(), bb.getWidth(), bb.getHeight());
+        					((ComponentNode) graph.findNode(point)).addPort(port);
+        				}else {
+        				// Fall 2: Beide müssen erzeugt werden
+        					ArrayList<PortNode> ports = new ArrayList<>();
+        					PortNode port = new PortNode(bb.getX(), bb.getY(), bb.getWidth(), bb.getHeight());
+        					ports.add(port);
+        					ComponentNode node = new ComponentNode(b.getX(), b.getY(), b.getWidth(), b.getHeight(), ports);
+        					graph.addNode(node, false);
+        					// zugehörigen Sketch mittels einer HashMap
+        					Sketch s = sketchMap.get(bb);
+            				s.setRecognizedElement(node);
+            	            recognizedNodes.add(node);
+            	            sketchesToBeRemoved.add(s);
+            			}
+        			}else {
+        				// also ist bb das größere Rechteck
+        				Point2D point = new Point2D(bb.getX(), bb.getY());
+        				if(graph.findNode(point) != null) {
+        					// Fall 1: ComponentNode existiert bereits
+        					PortNode port = new PortNode(b.getX(), b.getY(), b.getWidth(), b.getHeight());
+           					((ComponentNode) graph.findNode(point)).addPort(port);
+        				}else {
+        				// Fall 2: Beide müssen erzeugt werden
+        					ArrayList<PortNode> ports = new ArrayList<>();
+        					PortNode port = new PortNode(b.getX(), b.getY(), b.getWidth(), b.getHeight());
+        					ports.add(port);
+        					ComponentNode node = new ComponentNode(bb.getX(), bb.getY(), bb.getWidth(), bb.getHeight(), ports);
+        					graph.addNode(node, false);
+        					// zugehörigen Sketch mittels einer HashMap
+            				Sketch s = sketchMap.get(b);
+            				s.setRecognizedElement(node);
+            	            recognizedNodes.add(node);
+            	            sketchesToBeRemoved.add(s);
+        				}
+        			}	
+        		} else {
+        			// hier kommen verschiedene Optionen jetzt in Frage. Dazu gehört dann auch die hierarchische Komponente
+        			// dann kann man vielleicht mit contains() überprüfen
+        			// drei weitere Optionen: Beide sind Ports der gleichen Component, beide sind Ports verschiedener Components, beide sind Components
+        			
+        		}
+        	}
+        	
+        
+//        	// hier muss jetzt entschieden werden, ob ComponentNode oder PortNode
+//        	// brauchen sowas wie: für componentNode c: c.addPort(new PortNode(...)) um Port zu einer Component hinzuzufügen
+//        	// Frage, ob die Ports auch in recogniedNodes müssen
+//        	
+        }
+    }
 }
+    

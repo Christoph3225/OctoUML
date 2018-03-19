@@ -124,7 +124,7 @@ public class MontiArcController extends AbstractDiagramController{
 	
 	    deleteBtn.setOnAction(event -> deleteSelected());
 	
-	    recognizeBtn.setOnAction(event -> recognizeController.recognize(selectedSketches));
+	    recognizeBtn.setOnAction(event -> recognizeController.recognizeMonti(selectedSketches));
 	
 	    voiceBtn.setOnAction(event -> {
 	        if(voiceController.voiceEnabled){

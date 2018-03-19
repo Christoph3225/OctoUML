@@ -42,8 +42,7 @@ public class PortNodeView extends AbstractNodeView {
         
         this.setTranslateX(node.getTranslateX());
         this.setTranslateY(node.getTranslateY());
-        //createHandles();
-
+        
 
 	}
 	private void createRectangles(){

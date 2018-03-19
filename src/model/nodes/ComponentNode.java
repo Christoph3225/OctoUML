@@ -75,5 +75,9 @@ public class ComponentNode extends AbstractNode implements Serializable {
     public ArrayList<PortNode> getPorts(){
     	return this.Ports;
     }
+    
+    public void addPort(PortNode node){
+    	this.Ports.add(node);
+    }
 
 }
