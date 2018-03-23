@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+// hier müssen weitere Anpassungen für MontiArc Controller vorgenommen werden
+
 /**
  * Used by MainController for handling moving and resizing Nodes, among other things.
  */
@@ -313,7 +315,7 @@ public class NodeController {
         ySnapIndicatorMap.clear();
         currentResizeNode = null; //Only needed when resizing
     }
-
+    // hier müssen wir auch ergänzen für MontiArc Controller
     public void onDoubleClick(AbstractNodeView nodeView){
         if(nodeView instanceof ClassNodeView){
             showClassNodeEditDialog((ClassNode) diagramController.getNodeMap().get(nodeView));

@@ -17,12 +17,12 @@ public class ComponentNode extends AbstractNode implements Serializable {
 	
 	// Überlegen, ob hier nicht noch was rein muss. Wenn ja, brauchen wir auch setter/getter und müssen das in der Copy berücksichtigen
 	
-	public ComponentNode(double x, double y, double width, double height, ArrayList<PortNode> Ports){
+	public ComponentNode(double x, double y, double width, double height, ArrayList<PortNode> ports){
 		// irgendwas für Ports. Vielleicht auch einfach ein Array von Ports
 		super(x, y, width, height);
 		this.width = width < COMPONENT_MIN_WIDTH ? COMPONENT_MIN_WIDTH : width;
 		this.height = height < COMPONENT_MIN_HEIGHT ? COMPONENT_MIN_HEIGHT : height;
-		this.Ports = Ports;
+		this.Ports = ports;
 	}
 	
 	

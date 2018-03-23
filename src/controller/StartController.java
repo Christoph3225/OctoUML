@@ -41,7 +41,10 @@ public class StartController {
 
     public void handleActionNewClassDiagram(){
         tabController.getTabPane().getTabs().clear();
-        tabController.addTab(TabController.CLASS_DIAGRAM_VIEW_PATH);
+        //tabController.addTab(TabController.CLASS_DIAGRAM_VIEW_PATH);
+        tabController.addTab(TabController.MONTIARC_DIAGRAM_VIEW_PATH);
+        
+        
     }
 
     public void handleActionNewSequenceDiagram(){

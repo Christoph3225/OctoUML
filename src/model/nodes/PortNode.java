@@ -7,8 +7,8 @@ public class PortNode extends AbstractNode{
 	public PortNode(double x, double y, double width, double height){
 		super(x, y, width, height );
         //Don't accept nodes with size less than minWidth * minHeight.
-        this.width = width < CLASS_MIN_WIDTH ? CLASS_MIN_WIDTH : width;
-        this.height = height < CLASS_MIN_HEIGHT ? CLASS_MIN_HEIGHT : height;
+        this.width = width > PORT_MAX_WIDTH ? PORT_MAX_WIDTH : width;
+        this.height = height > PORT_MAX_HEIGHT ? PORT_MAX_HEIGHT : height;
 	}
 	
 	
@@ -33,25 +33,25 @@ public class PortNode extends AbstractNode{
 
     @Override
     public void setHeight(double height) {
-    	this.height = height < PORT_MIN_HEIGHT ? PORT_MIN_HEIGHT : height;
+    	this.height = height < PORT_MAX_HEIGHT ? PORT_MAX_HEIGHT : height;
         super.setHeight(height);
     }
 
     @Override
     public void setWidth(double width) {
-    	this.width = width < PORT_MIN_WIDTH ? PORT_MIN_WIDTH : width;
+    	this.width = width < PORT_MAX_WIDTH ? PORT_MAX_WIDTH : width;
         super.setWidth(width);
     }
 
     @Override
     public void remoteSetHeight(double height) {
-    	this.height = height < PORT_MIN_HEIGHT ? PORT_MIN_HEIGHT : height;
+    	this.height = height < PORT_MAX_HEIGHT ? PORT_MAX_HEIGHT : height;
         super.remoteSetHeight(height);    	
     }
 
     @Override
     public void remoteSetWidth(double width) {
-    	this.width = width < PORT_MIN_WIDTH ? PORT_MIN_WIDTH : width;
+    	this.width = width < PORT_MAX_WIDTH ? PORT_MAX_WIDTH : width;
         super.remoteSetWidth(width);
     }
     

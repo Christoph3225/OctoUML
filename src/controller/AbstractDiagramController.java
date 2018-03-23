@@ -617,12 +617,15 @@ public abstract class AbstractDiagramController {
      * @param node - Any AbstractNode
      * @return the created AbstractNodeView
      */
+    // hier brauchen wir auch noch ggf. einen PortNode
     public AbstractNodeView createNodeView(AbstractNode node, boolean remote) {
         AbstractNodeView newView;
         if (node instanceof ClassNode) {
             newView = new ClassNodeView((ClassNode) node);
         } else if (node instanceof PackageNode) {
             newView = new PackageNodeView((PackageNode) node);
+        } else if (node instanceof ComponentNode){
+        	newView = new ComponentNodeView((ComponentNode) node);
         } else {
             newView = new SequenceObjectView((SequenceObject) node);
             ((SequenceDiagramController)this).initLifelineHandleActions((SequenceObjectView)newView);
@@ -965,7 +968,7 @@ public abstract class AbstractDiagramController {
         colorPicker.setOnAction(t -> sketchController.color = colorPicker.getValue());
     }
     protected void setButtonClicked(Button b) {
-        buttonInUse.getStyleClass().remove("button-in-use");
+    	buttonInUse.getStyleClass().remove("button-in-use");
         buttonInUse = b;
         buttonInUse.getStyleClass().add("button-in-use");
     }

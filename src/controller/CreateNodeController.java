@@ -20,6 +20,8 @@ import java.util.Map;
  * Used by MainController for handling when a user creates a node using the class or package tool.
  */
 //TODO should be moved to NodeController!
+
+// Hier müssen wir auch noch ergänzen für MontiArc Nodes
 public class CreateNodeController {
 
     //For drag-creating rectangles

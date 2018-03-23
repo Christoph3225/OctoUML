@@ -41,6 +41,8 @@ public class TabController {
 
     public static final String CLASS_DIAGRAM_VIEW_PATH = "view/fxml/classDiagramView.fxml";
     public static final String SEQUENCE_DIAGRAM_VIEW_PATH = "view/fxml/sequenceDiagramView.fxml";
+    // Added for MontiArc
+    public static final String MONTIARC_DIAGRAM_VIEW_PATH = "view/fxml/MontiArcView.fxml";
 
 
     @FXML
@@ -56,6 +58,7 @@ public class TabController {
     }
 
     public Tab addTab(String pathToDiagram){
+    	// extended by MontiArc
         BorderPane canvasView = null;
         AbstractDiagramController diagramController = null;
         FXMLLoader loader;
@@ -71,10 +74,11 @@ public class TabController {
 
         tab.setContent(canvasView);
         tabMap.put(tab, diagramController);
-
         if(diagramController instanceof ClassDiagramController){
             tab.setText("Class Diagram " + tabMap.size());
-        } else {
+        }else if(diagramController instanceof MontiArcController){
+        	tab.setText("MontiArc Diagram " + tabMap.size());
+        }else{
             tab.setText("Sequence Diagram " + tabMap.size());
         }
         tabPane.getTabs().add(tab);
