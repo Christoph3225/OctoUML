@@ -27,6 +27,7 @@
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/view/edges/InheritanceEdgeView.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/GraphController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/model/nodes/PackageNode.java
+/Users/Christoph/Desktop/OctoUML-master/src/main/java/plugin/ExtensionLoader.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/util/commands/MoveGraphElementCommand.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/StartPlugInController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/model/edges/InheritanceEdge.java
@@ -41,7 +42,6 @@
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/util/commands/SetNodeOperationsCommand.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/SequenceDiagramController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/view/nodes/SequenceObjectView.java
-/Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/MontiArcController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/model/Graph.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/ServerController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/view/nodes/NodeView.java
@@ -50,6 +50,7 @@
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/view/nodes/ClassNodeView.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/util/commands/CompoundCommand.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/SketchController.java
+/Users/Christoph/Desktop/OctoUML-master/src/main/java/plugin/MontiCorePlugIn.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/TabController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/controller/CopyPasteController.java
 /Users/Christoph/Desktop/OctoUML-master/src/main/java/model/nodes/Node.java

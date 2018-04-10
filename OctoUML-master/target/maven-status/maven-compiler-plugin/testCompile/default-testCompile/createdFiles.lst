@@ -1,0 +1,5 @@
+ClassLoaderTest.class
+model/PackageTest.class
+model/GraphTest.class
+sikuli/GUITest.class
+view/ClassNodeViewTest.class

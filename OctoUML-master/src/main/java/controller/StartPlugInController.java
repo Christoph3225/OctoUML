@@ -3,13 +3,15 @@ package controller;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
 
-import org.apache.maven.shared.invoker.DefaultInvocationRequest;
-import org.apache.maven.shared.invoker.DefaultInvoker;
-import org.apache.maven.shared.invoker.InvocationRequest;
-import org.apache.maven.shared.invoker.Invoker;
-import org.apache.maven.shared.invoker.MavenInvocationException;
+import org.sonatype.aether.artifact.Artifact;
+import org.sonatype.aether.repository.RemoteRepository;
+import org.sonatype.aether.resolution.DependencyResolutionException;
+import org.sonatype.aether.util.artifact.DefaultArtifact;
+
+import com.jcabi.aether.Aether;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -26,7 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import util.POMEditor;
+import plugin.ExtensionLoader;
 
 
 public class StartPlugInController {
@@ -107,6 +109,43 @@ public class StartPlugInController {
     			
     			alert.showAndWait();
     		} else {
+    			/* Vorgehen nach Treffen 04-04-18
+    			 * Download artifakt von dependency
+    			 * lade fxml als view aus artifakt
+    			 * speichere usage pfad
+    			 * */
+    			// 1) Download von Artifakt
+    			//Testweise
+    			File local = new File("/tmp/local-repository2");
+    		    Collection<RemoteRepository> remotes = Arrays.asList(
+    		      new RemoteRepository(
+    		        "maven-central",
+    		        "default",
+    		        "http://repo1.maven.org/maven2/"
+    		      )
+    		    );
+    		    try {
+					Collection<Artifact> deps = new Aether(remotes, local).resolve(
+					  new DefaultArtifact("org.jsoup", "jsoup", "", "jar", "1.11.2"),
+					  "runtime"
+					);
+				} catch (DependencyResolutionException e) {
+					e.printStackTrace();
+				}
+    		    
+    		    ExtensionLoader<Object> exloader = new ExtensionLoader<Object>();  
+    		    Class somePlugin;
+				try {
+					somePlugin = (Class) exloader.LoadClass("tmp/local-repository2/org/jsoup/jsoup/1.11.2/jsoup-1.11.2.jar", "org.jsoup.Connection", Object.class);
+					System.out.println(somePlugin.getName());
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		    
+
+    		   
+    			/* alter Stand
     			// 1) füge dependency ein
     			POMEditor pomEdit = POMEditor.getInstance();
     			pomEdit.addDependency(currDependency);
@@ -178,9 +217,10 @@ public class StartPlugInController {
     			 
     			//6) set fxml path
     			String fxmlPath = currentResourceDir + "/view/fxml/" + filename;
+    			*/
     			
     			tabController.getTabPane().getTabs().clear();
-    			tabController.addTab(fxmlPath);
+    			//tabController.addTab(fxmlPath);
     			System.out.println(currDependency);
     		}
     }
