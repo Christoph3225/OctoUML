@@ -152,6 +152,18 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
+		<distributionManagement>
+		<repository>
+			<id>se-nexus</id>
+			<url>https://nexus.se.rwth-aachen.de/content/repositories/external-libraries/</url>
+		</repository>
+		<snapshotRepository>
+			<id>se-nexus</id>
+			<url>https://nexus.se.rwth-aachen.de/content/repositories/external-libraries/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 
 	<dependencies>
 		<!-- EMF dependencies -->
