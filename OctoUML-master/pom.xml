@@ -43,7 +43,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
     
-    <distributionManagement>
+  <distributionManagement>
 		<repository>
 			<id>se-nexus</id>
 			<url>http://nexus.se.rwth-aachen.de/content/repositories/montiarc-releases/</url>
@@ -163,18 +163,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
-		<distributionManagement>
-		<repository>
-			<id>se-nexus</id>
-			<url>https://nexus.se.rwth-aachen.de/content/repositories/external-libraries/</url>
-		</repository>
-		<snapshotRepository>
-			<id>se-nexus</id>
-			<url>https://nexus.se.rwth-aachen.de/content/repositories/external-libraries/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 
 	<dependencies>
 		<!-- EMF dependencies -->
