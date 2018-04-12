@@ -1,0 +1,58 @@
+Notizen 180328
+Erste MontiArc Komponente gezeigt
+PlugIn Projekte sollen Maven Projekte sein
+-> TODO: Auch für mich xD
+Maven Dependencies runterladen und instanziieren
+
+Arbeiten zwischen 60 und 90 Seiten gesamt circa
+
+Auf Projekt CheckCOCOS drauf schmeißen und sich die Fehlermedlungen anschauen
+Frage ob ErrorLog abstract realisierbar ist oder sprachspezifisch gemacht werden muss, müssen wir klären
+-> Wenn es Sprachspezifisch ist, müsste es im MontiArc PlugIn passieren
+-> Spannend ist die Schnittstelle zwischen OctoUML und der MontiArc PlugIn
+
+Frage 1: Wie kriege ich die Sprachen in das OctoUML
+Frage 2: Wie integriere ich Sprache die in das OctoUML sodass ich aus den Skizzen Förmchen erkenne
+Frage 3: Wie kriege ich die Fehlermedlung aus Sprachwerkzeug in OCtoUML
+Frage 4: Wie integriere ich Junit Tests
+
+Fragen/ Antworten zum Bild:
+Sprachentwickler sind nicht wir
+
+MontiArc hat auch ein Generate Tool
+Bild in schön in die Arbeit rein -> Christoph: für CD, Flo: für MontiArc
+Flo: MontiArc Generator anschauen und gucken wie der funktioniert
+
+Lebenszyklus in beide Arbeiten
+parse() kann Fehler schmeißen
+recognize() kann auch Fehler schmeißen
+Pfeil von ShowErrors zu DrawModel
+Zwischen Recognize() und Validate() muss noch eingeben von Texten rein wie z.B. Namen und so
+
+
+Forschungsfrage
+Wie kriege ich informelle Architekturen lauffähig
+
+Gliederung:
+Motivation
+Vorhaben
+Benefits
+
+Youtube anschauen
+simon peyton jones how to write a great research paper
+
+TODO für Nächste Woche
+Christoph: Maven Plugin, Maven Dependency runterladen, Maven PlugIn Projekt herunterladen
+	CD4A PlugIN mit ClassLoader laden
+
+Was muss ich liefern, was Christoph braucht?
+Zusammen:
+<<Interface>> DSL PlugIn genauer definieren, was alles gebraucht wird und wie wir es strukturieren
+Flo: Button für CodeGenerierung 
+
+
+Per Konvention muss es den Controller und die View geben
+Und die View braucht einen eindeutigen Namen
+Da die View den Controller kennt, reicht es schon die .fxml zu haben
+
+
