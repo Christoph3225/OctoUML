@@ -44,14 +44,10 @@
 	</properties>
     
   <distributionManagement>
-		<repository>
-			<id>se-nexus</id>
-			<url>http://nexus.se.rwth-aachen.de/content/repositories/montiarc-releases/</url>
-		</repository>
 		<snapshotRepository>
-			<id>se-nexus</id>
-			<url>http://nexus.se.rwth-aachen.de/content/repositories/montiarc-snapshots/</url>
-		</snapshotRepository>
+      <id>se-nexus</id>
+      <url>https://nexus.se.rwth-aachen.de/content/repositories/octouml-snapshots/</url>
+    </snapshotRepository>
 	</distributionManagement>
 
 
