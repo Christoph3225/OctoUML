@@ -351,7 +351,7 @@
 		<dependency>
 			<groupId>com.sikulix</groupId>
 			<artifactId>sikulixapi</artifactId>
-			<version>1.1.0</version>
+			<version>1.1.1</version>
 		</dependency>
 
 		<dependency>
@@ -423,10 +423,6 @@
 			<name>JBoss.org Maven repository</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
-        <repository>
-            <id>SikuliX-repo</id>
-            <url>http://oss.sonatype.org/content/groups/public</url>
-        </repository>
 	</repositories>
 
 
