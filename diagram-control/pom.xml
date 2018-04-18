@@ -273,14 +273,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>octouml.jxgrabkey</groupId>
-			<artifactId>jxgrabkey</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/jxgrabkey-1.0.jar</systemPath>
-		</dependency>
-
-		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
 			<version>5.0.4</version>
@@ -431,6 +423,10 @@
 			<name>JBoss.org Maven repository</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
+        <repository>
+            <id>SikuliX-repo</id>
+            <url>http://oss.sonatype.org/content/groups/public</url>
+        </repository>
 	</repositories>
 
 
