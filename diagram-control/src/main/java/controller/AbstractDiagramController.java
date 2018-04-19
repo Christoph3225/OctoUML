@@ -623,7 +623,7 @@ public abstract class AbstractDiagramController {
     }
     else {
       newView = new SequenceObjectView((SequenceObject) node);
-      //((SequenceDiagramController) this).initLifelineHandleActions((SequenceObjectView) newView);
+      ((SequenceDiagramController) this).initLifelineHandleActions((SequenceObjectView) newView);
     }
     
     if (!graph.getAllNodes().contains(node)) {

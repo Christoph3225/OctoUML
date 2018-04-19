@@ -52,14 +52,14 @@ public class EdgeController {
   public void onMousePressedOnCanvas(MouseEvent event) {
     dragStartX = event.getX();
     dragStartY = event.getY();
-    //if (diagramController instanceof AbstractDiagramController) {
+    if (diagramController instanceof AbstractDiagramController) {
       for (AbstractNodeView node : diagramController.getAllNodeViews()) {
         double middleOfNode = (node.getX() + (node.getX() + node.getWidth())) / 2;
         if (event.getX() > middleOfNode - 20 && event.getX() < middleOfNode + 20 && event.getY() > node.getY()) {
           startNodeView = node;
         }
       }
-    //}
+    }
     aDrawPane.getChildren().add(dragLine);
   }
   
@@ -80,7 +80,7 @@ public class EdgeController {
   /*
    * Used for sequence diagrams
    */
-  /*public void onMouseReleasedSequence() {
+  public void onMouseReleasedSequence() {
     for (AbstractNodeView nodeView : diagramController.getAllNodeViews()) { // TODO
                                                                             // implement
                                                                             // getAllLifelines
