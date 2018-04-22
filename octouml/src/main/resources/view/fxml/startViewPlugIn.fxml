@@ -33,7 +33,8 @@
         					<Label fx:id="folderPathLabel" text="No usage folder selected..."/>
         					<Button fx:id="chooseFolderButton" text="Choose Folder..." onAction="#handleActionChooseFolder"/>
         				</HBox>
-        				<Button fx:id="startModelingButton" text="Start Modeling..." onAction="#handleActionStartModelingOther"/>
+        				<!-- <Button fx:id="startModelingButton" text="Start Modeling..." onAction="#handleActionStartModelingOther"/>-->
+        				<Button fx:id="startModelingButton" text="Start Modeling..." onAction="#handleTestAction"/>
         			</VBox>
     			</center>
     		</BorderPane>
