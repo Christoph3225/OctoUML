@@ -79,6 +79,9 @@ public abstract class AbstractDiagramController {
   ArrayList<AnchorPane> allDialogs = new ArrayList<>();
   HashMap<AbstractNodeView, AbstractNode> nodeMap = new HashMap<>();
   
+  ArrayList<ServerController> serverControllers = new ArrayList<>();
+  ArrayList<ClientController> clientControllers = new ArrayList<>();
+  
   boolean selected = false; // A node is currently selected
   
   protected UndoManager undoManager;
@@ -541,15 +544,45 @@ public abstract class AbstractDiagramController {
     
     Optional<String> port = portDialog.showAndWait();
     
+    ServerController server = new ServerController(graph, this, Integer.parseInt(port.get()));
+    serverControllers.add(server);
   }
-
+  
+  public boolean handleMenuActionClient() {
+    
+    String[] result = NetworkUtils.queryServerPort();
+    
+    if (result != null) {
+      ClientController client = new ClientController(this, result[0], Integer.parseInt(result[1]));
+      if (!client.connect()) {
+        client.close();
+        return false;
+      }
+      else {
+        clientControllers.add(client);
+        return true;
+      }
+    }
+    else {
+      return false;
+    }
+  }
   
   public void setServerLabel(String s) {
     serverLabel.setText(s);
   }
   
- 
-
+  public void closeServers() {
+    for (ServerController server : serverControllers) {
+      server.closeServer();
+    }
+  }
+  
+  public void closeClients() {
+    for (ClientController client : clientControllers) {
+      client.closeClient();
+    }
+  }
   
   public void handleMenuActionImage() {
     try {
