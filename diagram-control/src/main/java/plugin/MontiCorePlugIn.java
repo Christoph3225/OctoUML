@@ -30,7 +30,7 @@ public interface MontiCorePlugIn {
   Class getASTNode();
   
   // returns the transformed (model to model) AST from the OctoUML Graph
-  ASTNode shapeToAST(Graph graph);
+  ASTNode shapeToAST(Graph graph, String path);
   
   // returns a list of errors
   List<String> check(ASTNode node);
