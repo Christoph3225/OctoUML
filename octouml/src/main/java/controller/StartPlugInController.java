@@ -97,7 +97,7 @@ public class StartPlugInController {
   public void handleTestAction() {
     //CD4APlugin p = new CD4APlugin();
     tabController.getTabPane().getTabs().clear();
-    tabController.addTab(p.getView());
+    //tabController.addTab(p.getView());
   }
   
   public void handleActionStartModelingOther() {
