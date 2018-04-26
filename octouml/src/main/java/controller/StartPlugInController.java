@@ -38,7 +38,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import plugin.CD4APlugin;
+//import plugin.CD4APlugin;
 
 public class StartPlugInController {
   
