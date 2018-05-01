@@ -40,4 +40,10 @@ public interface MontiCorePlugIn {
   
   // returns true if generation of code was successful
   boolean generateCode(ASTNode node, String path);
+  
+  // returns the symbol for the UML flag
+  String getFlagName();
+  
+  // adds the UML flag to the grid
+  void addUMLFlag(String name);
 }
