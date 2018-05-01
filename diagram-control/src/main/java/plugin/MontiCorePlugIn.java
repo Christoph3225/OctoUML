@@ -45,5 +45,8 @@ public interface MontiCorePlugIn {
   String getFlagName();
   
   // adds the UML flag to the grid
-  void addUMLFlag(String name);
+  void addUMLFlag(String modelname);
+  
+  // show container info dialog for language
+  void showContainerInfoDialog();
 }
