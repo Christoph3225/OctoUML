@@ -99,7 +99,7 @@ public class StartPlugInController {
     tabController.getTabPane().getTabs().clear();
     //tabController.addTab(p.getView());
   }
-  
+  /*
   public void handleActionStartModelingOther() {
     // handle invalid dependecy and invalid folder
     String msg = "No";
@@ -268,7 +268,7 @@ public class StartPlugInController {
        */
     }
   }
-  
+  */
   public File[] findFXML(String dirName) {
     File dir = new File(dirName);
     
