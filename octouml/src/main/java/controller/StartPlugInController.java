@@ -151,19 +151,19 @@ public class StartPlugInController {
       
       // Create a File object on the root of the directory containing the class
       // file
-      File file = new File("/Users/Christoph/testworkspace/CD4AnalysisPlugin/target/classes/");
+  //    File file = new File("/Users/Christoph/testworkspace/CD4AnalysisPlugin/target/classes/");
       
-      try {
+    //  try {
         // Convert File to a URL
-        URL url = file.toURL(); // file:/c:/myclasses/
-        URL[] urls = new URL[] { url };
+     //   URL url = file.toURL(); // file:/c:/myclasses/
+      //  URL[] urls = new URL[] { url };
         
         // Create a new class loader with the directory
-        ClassLoader cl = new URLClassLoader(urls);
+      //  ClassLoader cl = new URLClassLoader(urls);
         
         // Load in the class; MyClass.class should be located in
         // the directory file:/c:/myclasses/com/mycompany
-        Class<?> cls = cl.loadClass("controller.CD4AController");
+  /*      Class<?> cls = cl.loadClass("controller.CD4AController");
         Class<?> plugcls = cl.loadClass("plugin.CD4APlugin");
         try {
           Object o = cls.newInstance();
@@ -209,7 +209,7 @@ public class StartPlugInController {
       catch (MalformedURLException e) {
       }
       catch (ClassNotFoundException e) {
-      }
+      }*/
       /*
        * ExtensionLoader<Object> exloader = new ExtensionLoader<Object>(); Class
        * somePlugin; try { somePlugin = (Class) exloader.LoadClass(
@@ -266,7 +266,7 @@ public class StartPlugInController {
        * tabController.getTabPane().getTabs().clear();
        * tabController.addTab(fxmlPath); System.out.println(currDependency);
        */
-    }
+/*    }
   }
   */
   public File[] findFXML(String dirName) {
