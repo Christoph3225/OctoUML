@@ -5,6 +5,7 @@ import java.util.List;
 import controller.AbstractDiagramController;
 import de.monticore.ast.ASTNode;
 import de.monticore.prettyprint.IndentPrinter;
+import javafx.stage.Stage;
 import model.Graph;
 
 public interface MontiCorePlugIn {
@@ -48,5 +49,5 @@ public interface MontiCorePlugIn {
   void addUMLFlag(String modelname);
   
   // show container info dialog for language
-  List<String> showContainerInfoDialog();
+  List<String> showContainerInfoDialog(Stage stage);
 }
