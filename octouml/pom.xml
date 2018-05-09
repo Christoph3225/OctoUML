@@ -432,7 +432,13 @@
         <groupId>octouml</groupId>
         <artifactId>diagram-control</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-</dependency>
+    </dependency>
+    
+    <dependency>
+        <groupId>CD4AnalysisPlugin</groupId>
+        <artifactId>CD4AnalysisPlugin</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 		
 	</dependencies>
 
