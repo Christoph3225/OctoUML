@@ -2,43 +2,31 @@ package controller;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Optional;
 
 import org.sonatype.aether.RepositorySystemSession;
-import org.sonatype.aether.artifact.Artifact;
-import org.sonatype.aether.repository.RemoteRepository;
-import org.sonatype.aether.resolution.DependencyResolutionException;
-import org.sonatype.aether.util.artifact.DefaultArtifact;
-
-import com.jcabi.aether.Aether;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-//import plugin.CD4APlugin;
+import plugin.CD4APlugin;
 
 public class StartPlugInController {
   
@@ -95,11 +83,11 @@ public class StartPlugInController {
   }
   
   public void handleTestAction() {
-    //CD4APlugin p = new CD4APlugin();
+    CD4APlugin p = new CD4APlugin();
     tabController.getTabPane().getTabs().clear();
-    //tabController.addTab(p.getView());
+    tabController.addTab(p.getView());
   }
-  /*
+  
   public void handleActionStartModelingOther() {
     // handle invalid dependecy and invalid folder
     String msg = "No";
@@ -151,19 +139,19 @@ public class StartPlugInController {
       
       // Create a File object on the root of the directory containing the class
       // file
-  //    File file = new File("/Users/Christoph/testworkspace/CD4AnalysisPlugin/target/classes/");
+      File file = new File("/Users/Christoph/testworkspace/CD4AnalysisPlugin/target/classes/");
       
-    //  try {
+      try {
         // Convert File to a URL
-     //   URL url = file.toURL(); // file:/c:/myclasses/
-      //  URL[] urls = new URL[] { url };
+        URL url = file.toURL(); // file:/c:/myclasses/
+        URL[] urls = new URL[] { url };
         
         // Create a new class loader with the directory
-      //  ClassLoader cl = new URLClassLoader(urls);
+        ClassLoader cl = new URLClassLoader(urls);
         
         // Load in the class; MyClass.class should be located in
         // the directory file:/c:/myclasses/com/mycompany
-  /*      Class<?> cls = cl.loadClass("controller.CD4AController");
+        Class<?> cls = cl.loadClass("controller.CD4AController");
         Class<?> plugcls = cl.loadClass("plugin.CD4APlugin");
         try {
           Object o = cls.newInstance();
@@ -209,66 +197,10 @@ public class StartPlugInController {
       catch (MalformedURLException e) {
       }
       catch (ClassNotFoundException e) {
-      }*/
-      /*
-       * ExtensionLoader<Object> exloader = new ExtensionLoader<Object>(); Class
-       * somePlugin; try { somePlugin = (Class) exloader.LoadClass(
-       * "tmp/local-repository2/org/jsoup/jsoup/1.11.2/jsoup-1.11.2.jar",
-       * "org.jsoup.Connection", Object.class);
-       * System.out.println(somePlugin.getName()); } catch
-       * (ClassNotFoundException e) { // TODO Auto-generated catch block
-       * e.printStackTrace(); }
-       */
-      
-      /*
-       * alter Stand // 1) füge dependency ein POMEditor pomEdit =
-       * POMEditor.getInstance(); pomEdit.addDependency(currDependency); //TODO
-       * // maven invoker // download sources from dependency // get fxml file
-       * from sources // restart application with fxml file from sources //2)
-       * get name von dem fxml file String filename =
-       * findFXML(folderPathLabel.getText())[0].getName(); //3) move files to
-       * maven strucutre String sourcePath = folderPathLabel.getText(); File
-       * sourceFolder = new File(sourcePath); File[] allFiles =
-       * sourceFolder.listFiles(); String targetPath = ""; File currentDirFile =
-       * new File("."); String currentSourceDir =
-       * currentDirFile.getAbsolutePath().substring(0,
-       * currentDirFile.getAbsolutePath().length()-1) + "src/main/java/"; String
-       * currentResourceDir = currentDirFile.getAbsolutePath().substring(0,
-       * currentDirFile.getAbsolutePath().length()-1) + "src/main/resources/";
-       * for(File f : allFiles) { if(f.getName().endsWith(".fxml")) { targetPath
-       * = currentResourceDir + "/view/fxml/"; f.renameTo(new File(targetPath +
-       * f.getName())); } if(f.getName().contains("Controller")) { targetPath =
-       * currentSourceDir + "controller/"; f.renameTo(new File(targetPath +
-       * f.getName())); } if(f.getName().contains("Dialog")) { targetPath =
-       * currentSourceDir + "controller/dialog/"; f.renameTo(new File(targetPath
-       * + f.getName())); } if(f.getName().contains("Edge")) { targetPath =
-       * currentSourceDir + "model/edges/"; f.renameTo(new File(targetPath +
-       * f.getName())); } if(f.getName().contains("Node")) { targetPath =
-       * currentSourceDir + "model/nodes/"; f.renameTo(new File(targetPath +
-       * f.getName())); } if(f.getName().contains("EdgeView")) { targetPath =
-       * currentSourceDir + "view/edges/"; f.renameTo(new File(targetPath +
-       * f.getName())); } if(f.getName().contains("NodeView")) { targetPath =
-       * currentSourceDir + "view/nodes/"; f.renameTo(new File(targetPath +
-       * f.getName())); } } // 4) refresh workspace // 5) invoke maven clean
-       * install InvocationRequest request = new DefaultInvocationRequest();
-       * request.setPomFile(new
-       * File(currentDirFile.getAbsolutePath().substring(0,
-       * currentDirFile.getAbsolutePath().length()-1) + "pom.xml"));
-       * request.setGoals(Arrays.asList( "clean", "install")); Invoker invoker =
-       * new DefaultInvoker(); invoker.setMavenHome(new
-       * File("/usr/local/Cellar/maven/3.5.3/libexec")); try {
-       * invoker.execute(request); } catch (MavenInvocationException e) {
-       * e.printStackTrace(); } //TODO Progress von Maven anzeigen //6) set fxml
-       * path String fxmlPath = currentResourceDir + "/view/fxml/" + filename;
-       */
-      /*
-       * String fxmlPath = cls.getResource();
-       * tabController.getTabPane().getTabs().clear();
-       * tabController.addTab(fxmlPath); System.out.println(currDependency);
-       */
-/*    }
+      }
+    }
   }
-  */
+  
   public File[] findFXML(String dirName) {
     File dir = new File(dirName);
     

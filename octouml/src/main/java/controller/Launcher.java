@@ -15,47 +15,48 @@ import javafx.stage.Stage;
  * Launches application with main view "tabView.classDiagramView.fxml"
  */
 public class Launcher extends Application {
-	
-    private TabController tabController = null;
-
-    public void start(Stage stage) throws Exception {
-        VBox tabView = null;
-        FXMLLoader loader;
-        BorderPane startView = null;
-        try {
-        		loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/mainView.fxml"));
-            tabView = loader.load();
-            tabController = loader.getController();
-            loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/startViewPlugIn.fxml"));
-            startView = loader.load();
-            ((StartPlugInController)loader.getController()).setTabController(tabController);
-            ((StartPlugInController)loader.getController()).setStage(stage);
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
-        Scene scene = new Scene(tabView, 1000, 800);
-        tabController.setStage(stage);
-
-        stage.setScene(scene);
-        stage.setTitle("OctoUML");
-        stage.setFullScreen(true);
-        stage.getIcons().add(new Image("icons/appIcon.png"));
-        stage.show();
-
-        Tab tab = new Tab();
-        tab.setContent(startView);
-        tab.setText("Start");
-        tabController.getTabPane().getTabs().add(tab);
+  
+  private TabController tabController = null;
+  
+  public void start(Stage stage) throws Exception {
+    VBox tabView = null;
+    FXMLLoader loader;
+    BorderPane startView = null;
+    try {
+      loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/mainView.fxml"));
+      tabView = loader.load();
+      tabController = loader.getController();
+      loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/startViewPlugIn.fxml"));
+      startView = loader.load();
+      ((StartPlugInController) loader.getController()).setTabController(tabController);
+      ((StartPlugInController) loader.getController()).setStage(stage);
+      
     }
-
-    public void stop(){
-        System.out.println("Stopping!");
-        tabController.stop();
+    catch (IOException e) {
+      System.out.println(e.getMessage());
     }
     
-    public static void main (String args[]){
-    	Launcher.launch(args);
-    }
+    Scene scene = new Scene(tabView, 1000, 800);
+    tabController.setStage(stage);
+    
+    stage.setScene(scene);
+    stage.setTitle("OctoUML");
+    stage.setFullScreen(true);
+    stage.getIcons().add(new Image("icons/appIcon.png"));
+    stage.show();
+    
+    Tab tab = new Tab();
+    tab.setContent(startView);
+    tab.setText("Start");
+    tabController.getTabPane().getTabs().add(tab);
+  }
+  
+  public void stop() {
+    System.out.println("Stopping!");
+    tabController.stop();
+  }
+  
+  public static void main(String args[]) {
+    Launcher.launch(args);
+  }
 }
