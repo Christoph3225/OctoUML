@@ -486,4 +486,9 @@ public class ClassDiagramController extends AbstractDiagramController {
       
     });
   }
+  
+  @Override
+  public String getTabControllerName() {
+    return "Class diagram";
+  }
 }

@@ -72,12 +72,8 @@ public class TabController {
     tab.setContent(canvasView);
     tabMap.put(tab, diagramController);
     
-    if (diagramController instanceof ClassDiagramController) {
-      tab.setText("Class Diagram " + tabMap.size());
-    }
-    else {
-      tab.setText("Sequence Diagram " + tabMap.size());
-    }
+    tab.setText(diagramController.getTabControllerName() + " " + tabMap.size());
+    
     tabPane.getTabs().add(tab);
     diagramController.setStage(stage);
     return tab;

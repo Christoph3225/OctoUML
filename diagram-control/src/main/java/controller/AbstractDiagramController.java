@@ -1091,4 +1091,7 @@ public abstract class AbstractDiagramController {
   public GraphController getGraphController() {
     return graphController;
   }
+
+  abstract public String getTabControllerName();
+
 }

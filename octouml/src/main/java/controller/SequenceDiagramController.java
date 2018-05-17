@@ -586,4 +586,9 @@ public class SequenceDiagramController extends AbstractDiagramController {
       voiceController.onVoiceButtonClick();
     });
   }
+  
+  @Override
+  public String getTabControllerName() {
+    return "Sequence diagram";
+  }
 }
