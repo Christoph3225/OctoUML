@@ -124,7 +124,7 @@ public abstract class AbstractDiagramController {
   
   // necessary for plugin mechanisms
   @FXML
-  protected Button /* validateBtn, */ generateBtn;
+  protected Button  validateBtn, generateBtn;
   
   ContextMenu aContextMenu;
   private AbstractDiagramController instance = this;
