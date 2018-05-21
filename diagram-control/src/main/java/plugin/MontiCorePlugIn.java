@@ -4,7 +4,6 @@ import java.util.List;
 
 import controller.AbstractDiagramController;
 import de.monticore.ast.ASTNode;
-import de.monticore.prettyprint.IndentPrinter;
 import de.monticore.types.prettyprint.TypesPrettyPrinterConcreteVisitor;
 import javafx.stage.Stage;
 import model.Graph;
@@ -32,10 +31,10 @@ public interface MontiCorePlugIn {
   ASTNode getASTNode();
   
   // returns the transformed (model to model) AST from the OctoUML Graph
-  ASTNode shapeToAST(Graph graph, String modelName);
+  ASTNode shapeToAST(Graph graph, List<String> containerInfoList);
   
   // returns a list of errors
-  List<String> check(ASTNode node);
+  List<MontiCoreException> check(ASTNode node);
   
   // returns the generator of the DSL
   String getGenerator();
@@ -50,5 +49,5 @@ public interface MontiCorePlugIn {
   void addUMLFlag(String modelname);
   
   // show container info dialog for language
-  List<String> showContainerInfoDialog(Stage stage);
+  List<String> showContainerInfoDialog(Stage stage, List<String> infoList);
 }

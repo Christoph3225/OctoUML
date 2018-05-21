@@ -83,9 +83,28 @@ public class StartPlugInController {
   }
   
   public void handleTestAction() {
-    CD4APlugin p = new CD4APlugin();
-    tabController.getTabPane().getTabs().clear();
-    tabController.addTab(p.getView());
+	// handle invalid dependecy and invalid folder
+	    String msg = "No";
+	    if (folderPathLabel.getText().equals("No usage folder selected...")) {
+	      msg += " folder is chosen!";
+	    }
+	    //TODO later on handle no dependency selected
+	    
+	    if (!msg.equals("No")) {
+	      Alert alert = new Alert(AlertType.INFORMATION);
+	      alert.setTitle("Error in Starting");
+	      alert.setHeaderText(null);
+	      alert.setContentText(msg);
+	      
+	      alert.initOwner(this.stage);
+	      
+	      alert.showAndWait();
+	    } else {
+	    	CD4APlugin p = CD4APlugin.getInstance();
+	    	p.setUsageFolderPath(folderPathLabel.getText());
+	    	tabController.getTabPane().getTabs().clear();
+	    	tabController.addTab(p.getView());
+	    }
   }
   
   public void handleActionStartModelingOther() {
