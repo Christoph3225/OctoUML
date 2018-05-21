@@ -100,10 +100,10 @@ public class StartPlugInController {
 	      
 	      alert.showAndWait();
 	    } else {
-	    	/*CD4APlugin p = CD4APlugin.getInstance();
+	    	CD4APlugin p = CD4APlugin.getInstance();
 	    	p.setUsageFolderPath(folderPathLabel.getText());
 	    	tabController.getTabPane().getTabs().clear();
-	    	tabController.addTab(p.getView());*/
+	    	tabController.addTab(p.getView());
 	    }
   }
   
