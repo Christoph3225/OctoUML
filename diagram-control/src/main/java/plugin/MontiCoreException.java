@@ -7,5 +7,5 @@ public interface MontiCoreException {
   AbstractNode getNode();
   Pane getContentPane();
   String getContentMessage();
-  void handleActionClickOnPane();
+  //void handleActionClickOnPane();
 }
