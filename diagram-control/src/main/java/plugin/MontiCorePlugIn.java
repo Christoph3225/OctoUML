@@ -1,5 +1,6 @@
 package plugin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import controller.AbstractDiagramController;
@@ -7,6 +8,8 @@ import de.monticore.ast.ASTNode;
 import de.monticore.types.prettyprint.TypesPrettyPrinterConcreteVisitor;
 import javafx.stage.Stage;
 import model.Graph;
+import model.nodes.AbstractNode;
+import view.nodes.AbstractNodeView;
 
 public interface MontiCorePlugIn {
   // returns the diagram controller
@@ -34,7 +37,7 @@ public interface MontiCorePlugIn {
   ASTNode shapeToAST(Graph graph, List<String> containerInfoList);
   
   // returns a list of errors
-  List<MontiCoreException> check(ASTNode node);
+  List<MontiCoreException> check(ASTNode node, HashMap<AbstractNodeView, AbstractNode> map);
   
   // returns the generator of the DSL
   String getGenerator();
