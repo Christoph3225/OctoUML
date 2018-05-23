@@ -11,8 +11,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import plugin.CD4APlugin;
+
 import org.controlsfx.control.Notifications;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
@@ -24,7 +28,9 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The class controlling the top menu and the tabs.
@@ -157,6 +163,49 @@ public class TabController {
   public void handleMenuActionNewSequenceDiagram() {
     Tab tab = addTab(SEQUENCE_DIAGRAM_VIEW_PATH);
     tabPane.getSelectionModel().select(tab);
+  }
+  
+  public void handleMenuActionNewOtherDiagram() {
+    //TODO
+    Dialog<List<String>> dialog = new Dialog<List<String>>();
+    dialog.setTitle("Enter Other Diagram Properties");
+
+    DialogPane pane = new DialogPane();
+    GridPane gridPane = new GridPane();
+    Label dependencyLbl = new Label("Enter maven dependency:");
+    Label folderLbl = new Label("Enter folder for generation:");
+    Label diagramPathLbl = new Label("Enter path to diagram:");
+    TextField dependencyTF = new TextField();
+    TextField folderTF = new TextField();
+    TextField diagramPathTF = new TextField();
+    gridPane.getColumnConstraints().add(new ColumnConstraints(170));
+    gridPane.getColumnConstraints().add(new ColumnConstraints(200));
+    gridPane.setHgap(30);
+    gridPane.setVgap(10);
+    gridPane.add(dependencyLbl, 0, 0);
+    gridPane.add(dependencyTF, 1, 0);
+    gridPane.add(folderLbl, 0, 1);
+    gridPane.add(folderTF, 1, 1);
+    gridPane.add(diagramPathLbl, 0, 2);
+    gridPane.add(diagramPathTF, 1, 2);
+
+    pane.getChildren().add(gridPane);
+    pane.setPrefSize(400, 160);
+    pane.getButtonTypes().add(ButtonType.OK);
+    dialog.setDialogPane(pane);
+    dialog.initOwner(stage);
+    Optional<List<String>> result = dialog.showAndWait();
+    String OTHER_DIAGRAM_VIEW_PATH = "";
+    String folderPath = "";
+    if (result.isPresent()) {
+      OTHER_DIAGRAM_VIEW_PATH = diagramPathTF.getText();
+      folderPath = folderTF.getText();
+    }
+    CD4APlugin p = CD4APlugin.getInstance();
+    p.setUsageFolderPath(folderPath);
+    Tab tab = addTab(OTHER_DIAGRAM_VIEW_PATH);
+    tabPane.getSelectionModel().select(tab);
+    //TODO handle maven dependency wenn dynamically loading is working
   }
   
   public void handleMenuActionServer() {
