@@ -52,5 +52,5 @@ public interface MontiCorePlugIn {
   void addUMLFlag(String modelname);
   
   // show container info dialog for language
-  List<String> showContainerInfoDialog(Stage stage, List<String> infoList);
+  List<String> showContainerInfoDialog(Stage stage, List<String> infoNames, List<String> infoList);
 }

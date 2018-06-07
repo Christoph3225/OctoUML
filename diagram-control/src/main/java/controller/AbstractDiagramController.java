@@ -2,6 +2,8 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
@@ -19,11 +21,13 @@ import javafx.stage.Stage;
 import model.*;
 import model.edges.*;
 import model.nodes.*;
+import plugin.MontiCoreException;
 import util.Constants;
 import util.NetworkUtils;
 import util.commands.*;
 import util.insertIMG.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import util.persistence.PersistenceManager;
 import view.edges.*;
@@ -40,7 +44,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.io.FileUtils;
+import org.controlsfx.control.Notifications;
+import org.controlsfx.control.PopOver;
+
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -124,7 +134,7 @@ public abstract class AbstractDiagramController {
   
   // necessary for plugin mechanisms
   @FXML
-  protected Button  validateBtn, generateBtn;
+  protected Button validateBtn, generateBtn, editInfoBtn, showErrorLogBtn, showCodeBtn;
   
   ContextMenu aContextMenu;
   private AbstractDiagramController instance = this;
@@ -150,6 +160,71 @@ public abstract class AbstractDiagramController {
     undoManager = new UndoManager();
     
     graphController.drawGrid();
+  }
+  
+  public void showErrorLog(List<MontiCoreException> errorLog) {
+    PopOver pop = new PopOver();
+    if (errorLog.size() > 0) {
+      VBox box = new VBox();
+      for (MontiCoreException ex : errorLog) {
+        box.getChildren().add(ex.getContentPane());
+      }
+      pop.setContentNode(box);
+    }
+    
+    pop.show(showErrorLogBtn);
+  }
+  
+  public void showCode(String path) {
+    if(selectedNodes.size() > 0) {
+      for(AbstractNodeView view : selectedNodes) {
+        PopOver pop = new PopOver();
+        String fileTitle = view.getRefNode().getTitle();
+        String folder = path;
+        
+        String filename = folder + "/src/main/java/" + fileTitle + ".java";
+        File file = new File(filename);
+        if(file.exists()) {
+          VBox box = new VBox();
+          try {
+            List<String> allLines = Files.readAllLines(Paths.get(filename));
+            String code = "";
+            for(String line : allLines) {
+              code += line + "\n";
+            }
+            TextArea textField = new TextArea(code);
+            Button saveBtn = new Button("Save");
+            saveBtn.setOnAction(new EventHandler<ActionEvent>() {
+              @Override 
+              public void handle(ActionEvent e) {
+                try {
+                  FileUtils.writeStringToFile(new File(filename), textField.getText());
+                  Notifications.create().title("Code Display").text("Code file was saved.").showInformation();
+                }
+                catch (IOException e1) {
+                  e1.printStackTrace();
+                }
+              }
+            });
+            box.getChildren().add(textField);
+            box.getChildren().add(saveBtn);
+          }
+          catch (IOException e) {
+            e.printStackTrace();
+          }
+          pop.setContentNode(box);
+        } else {
+          Label label = new Label("No generated code available.");
+          pop.setContentNode(label);
+        }
+        
+        //pop.setContentNode();
+        
+        pop.show(view);
+      }
+    } else {
+      Notifications.create().title("Code Display").text("No Node was selected.").showInformation();
+    }
   }
   
   private void initDrawPaneActions() {
