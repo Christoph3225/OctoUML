@@ -223,55 +223,37 @@
 			<version>${logback.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>octouml.paleo</groupId>
 			<artifactId>paleo</artifactId>
 			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/paleo.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>octouml.ecologylabFundamental</groupId>
 			<artifactId>ecologylabFundamental</artifactId>
 			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/ecologylabFundamental.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>octouml.weka</groupId>
 			<artifactId>weka</artifactId>
 			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/weka.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>octouml.kryonet</groupId>
 			<artifactId>kryonet</artifactId>
 			<version>2.21</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/kryonet-2.21.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>octouml.sphinx4-core-5prealpha-20160628.232526-10</groupId>
 			<artifactId>sphinx4-core-5prealpha-20160628.232526-10</artifactId>
 			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/voice/sphinx4-core-5prealpha-20160628.232526-10.jar</systemPath>
 		</dependency>
-
 		<dependency>
 			<groupId>octouml.sphinx4-data-5prealpha-20160628.232535-10</groupId>
 			<artifactId>sphinx4-data-5prealpha-20160628.232535-10</artifactId>
 			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/voice/sphinx4-data-5prealpha-20160628.232535-10.jar</systemPath>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
@@ -309,7 +291,7 @@
 			<version>4.0.0</version>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
@@ -327,6 +309,12 @@
 					<artifactId>jms</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>-->
+		
+		<dependency>
+ 			<groupId>octouml.log4j</groupId>
+ 			<artifactId>log4j</artifactId>
+ 			<version>1.2.15</version>
 		</dependency>
 
 		<dependency>
@@ -352,12 +340,12 @@
 			<groupId>com.sikulix</groupId>
 			<artifactId>sikulixapi</artifactId>
 			<version>1.1.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.github.vidstige</groupId>
-                    <artifactId>jadb</artifactId>
-                </exclusion>
-            </exclusions>
+			<exclusions>
+  				<exclusion>
+   					<groupId>com.github.vidstige</groupId>
+   					<artifactId>jadb</artifactId>
+  				</exclusion>
+ 			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -430,13 +418,6 @@
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>se-nexus</id>
-            <url>https://nexus.se.rwth-aachen.de/content/repositories/octouml-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
 
 	<reporting>
