@@ -43,7 +43,7 @@ public interface MontiCorePlugIn {
   String getGenerator();
   
   // returns true if generation of code was successful
-  boolean generateCode(ASTNode node, String path);
+  boolean generateCode(ASTNode node, String packageName, String path);
   
   // returns the symbol for the UML flag
   String getFlagName();
